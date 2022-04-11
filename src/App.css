@@ -1,38 +1,70 @@
-.App {
-  text-align: center;
+:root {
+    --input-background: #F0F0F0;
+    --input-border-color: #1976d2;
+    --input-background--hover: rgba(0, 0, 0, 0.09);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*,
+*::before,
+::after {
+    box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.row {
+    display: flex;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.justify-space-between {
+    justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.items-center {
+    align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input-background {
+    background-color: var(--input-background);
+    /* border-bottom: 2px solid darkgrey; */
+}
+
+.rich-text-box {
+    padding: 12px;
+    padding-bottom: 0;
+}
+
+.rich-text-box:hover {
+    background-color: var(--input-background--hover);
+}
+
+/* +24 & -12px because of padding  */
+.rich-text-box:focus-within .textarea-control::after {
+    animation: 1s in-out ease-in-out;
+    left: -12px;
+    width: calc(100% + 24px);
+
+}
+
+.rich-text-box textarea {
+    background: none;
+    border: none;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    overflow: auto;
+    resize: none;
+}
+
+.rich-text-box .textarea-control {
+    position: relative;
+}
+
+.rich-text-box .textarea-control::after {
+    content: '';
+    position: absolute;
+    background-color: var(--input-border-color);
+    width: 0px;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transition: 170ms all ease-in-out;
 }
