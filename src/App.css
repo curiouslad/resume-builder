@@ -4,10 +4,18 @@
     --input-background--hover: rgba(0, 0, 0, 0.09);
 }
 
+/* RESET BEGIN */
 *,
 *::before,
 ::after {
     box-sizing: border-box;
+}
+
+/* RESET END */
+
+/* UTILITY BEGIN */
+.text-left {
+    text-align: left;
 }
 
 .row {
@@ -27,6 +35,11 @@
     /* border-bottom: 2px solid darkgrey; */
 }
 
+/* UTILITY END */
+
+
+
+/* RICH TEXT BOX BEGIN */
 .rich-text-box {
     padding: 12px;
     padding-bottom: 0;
@@ -68,3 +81,5 @@
     left: 50%;
     transition: 170ms all ease-in-out;
 }
+
+/* RICH TEXT BOX END */
