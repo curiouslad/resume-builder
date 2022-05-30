@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Grid, IconButton, Tooltip, Typography } from "@mui/material";
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 interface SectionLayoutProps {
@@ -15,24 +15,31 @@ export const SectionLayout = (
         title, description, children, actionIcon, actionText, onActionClick
     }: SectionLayoutProps) => {
     return (
-        <Grid>
-            <Grid item>
-
-                <Grid
-                    alignItems="center"
-                    justifyContent="start"
-                    container
-                >
-                    <Grid item>
+        <Grid
+            container
+            // alignItems="baseline"
+            justifyContent="start"
+        >
+            <Grid
+                item
+                justifySelf="start"
+                alignSelf="start"
+                xs={1}
+                sx={{
+                    // marginRight: '-15px'
+                }}
+            >
+                <Tooltip title="Reorder">
+                    <IconButton
+                        aria-label="Reorder by dragging"
+                    >
                         <DragIndicatorIcon />
-                    </Grid>
-                    <Grid item>
-                        <Typography variant="h4">{title}</Typography>
-                    </Grid>
-                </Grid>
+                    </IconButton>
+                </Tooltip>
             </Grid>
-            <Grid item>
-                <Typography variant="body2" paddingLeft="25px">{description}</Typography>
+            <Grid item xs={11}>
+                <Typography variant="h4">{title}</Typography>
+                <Typography variant="body2">{description}</Typography>
                 {children}
                 {actionText &&
                     <Button
@@ -42,7 +49,6 @@ export const SectionLayout = (
                     </Button>
                 }
             </Grid>
-
         </Grid>
     )
 }

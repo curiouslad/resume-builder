@@ -1,11 +1,12 @@
 import { Grid } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { CollapsableFormItem } from "../Collapsable/CollapsableFormItem";
+import { useAppSelector, useAppDispatch } from "../../../../app/hooks";
+import { CollapsableFormItem } from "../../../Collapsable/CollapsableFormItem";
+import { removeFormItem, updateFormItem } from "../../EditorFormSlice";
 import { LanguagesItem } from "./LanguagesItem";
-import { removeLanguage, updateLanguage } from "./LanguagesSlice";
+
 
 export const LanguagesForm = () => {
-    const languages = useAppSelector(state => state.languages.fields);
+    const languages = useAppSelector(state => state.editorForm.languages.fields);
     const dispatch = useAppDispatch();
     const languagesList = languages.map(language => {
         return (
@@ -19,13 +20,20 @@ export const LanguagesForm = () => {
                     subHeader={language.level}
                     id={language.id}
                     onMenuDelete={(id: string) => {
-                        dispatch(removeLanguage(id));
+                        dispatch(removeFormItem({
+                            id,
+                            type: "languages"
+                        }))
                     }}
                 >
                     <LanguagesItem
                         field={language}
                         onChange={(id, data) => {
-                            dispatch(updateLanguage({ id, data }));
+                            dispatch(updateFormItem({
+                                id,
+                                data,
+                                type: "languages"
+                            }));
                         }}
                     />
                 </CollapsableFormItem>

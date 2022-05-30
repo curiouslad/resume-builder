@@ -1,21 +1,17 @@
 import { Grid, Typography } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add';
-import { PersonalDetails } from "../features/PersonalDetails/PersonalDetails"
-import { Summary } from "../features/Summary/Summary"
-import { LinksForm } from "../features/Links/LinksForm"
+import { PersonalDetails } from "../features/EditorForm/components/PersonalDetails/PersonalDetails"
+import { Summary } from "../features/EditorForm/components/Summary/Summary"
+import { LinksForm } from "../features/EditorForm/components/Links/LinksForm"
 import { SectionLayout } from "./SectionLayout"
-import { EmploymentDetailsForm } from "../features/Employment/EmploymentDetailsForm"
-import { EducationForm } from "../features/Education/EducationForm";
-import { SkillsForm } from "../features/Skills/SkillsForm";
+import { EmploymentDetailsForm } from "../features/EditorForm/components/Employment/EmploymentDetailsForm"
+import { EducationForm } from "../features/EditorForm/components/Education/EducationForm";
+import { SkillsForm } from "../features/EditorForm/components/Skills/SkillsForm";
 import { useAppDispatch } from "../app/hooks";
-import { addEmploymentItem } from "../features/Employment/EmploymentSlice";
 import { nanoid } from "@reduxjs/toolkit";
-import { addEducationItem } from "../features/Education/EducationSlice";
-import { addSkill } from "../features/Skills/SkillsSlice";
-import { addLink } from "../features/Links/LinksSlice";
-import { LanguagesForm } from "../features/Languages/LanguagesForm";
-import { addLanguage } from "../features/Languages/LanguagesSlice";
+import { addFormItem } from "../features/EditorForm/EditorFormSlice";
 import { AddSection } from "./AddSection";
+import { LanguagesForm } from "../features/EditorForm/components/Languages/LanguagesForm";
 
 
 
@@ -40,14 +36,17 @@ export const Form = () => {
             actionText: "Add",
             actionIcon: <AddIcon />,
             onActionClick() {
-                dispatch(addEmploymentItem({
-                    id: nanoid(),
-                    jobTitle: "",
-                    employer: "",
-                    startDate: null,
-                    endDate: null,
-                    city: "",
-                    description: []
+                dispatch(addFormItem({
+                    type: "employment",
+                    data: {
+                        id: nanoid(),
+                        jobTitle: "",
+                        employer: "",
+                        startDate: null,
+                        endDate: null,
+                        city: "",
+                        description: []
+                    }
                 }));
             }
         },
@@ -58,14 +57,17 @@ export const Form = () => {
             actionText: "Add",
             actionIcon: <AddIcon />,
             onActionClick() {
-                dispatch(addEducationItem({
-                    id: nanoid(),
-                    school: "",
-                    degree: "",
-                    startDate: null,
-                    endDate: null,
-                    city: "",
-                    description: []
+                dispatch(addFormItem({
+                    type: "education",
+                    data: {
+                        id: nanoid(),
+                        school: "",
+                        degree: "",
+                        startDate: null,
+                        endDate: null,
+                        city: "",
+                        description: []
+                    }
                 }))
             }
         },
@@ -76,10 +78,13 @@ export const Form = () => {
             actionText: "Add",
             actionIcon: <AddIcon />,
             onActionClick() {
-                dispatch(addSkill({
-                    id: nanoid(),
-                    name: "",
-                    level: ""
+                dispatch(addFormItem({
+                    type: "skills",
+                    data: {
+                        id: nanoid(),
+                        name: "",
+                        level: ""
+                    }
                 }))
             }
         },
@@ -90,10 +95,13 @@ export const Form = () => {
             actionText: "Add",
             actionIcon: <AddIcon />,
             onActionClick() {
-                dispatch(addLink({
-                    id: nanoid(),
-                    name: "",
-                    link: ""
+                dispatch(addFormItem({
+                    type: "links",
+                    data: {
+                        id: nanoid(),
+                        name: "",
+                        link: ""
+                    }
                 }));
             }
         },
@@ -104,10 +112,13 @@ export const Form = () => {
             actionText: "Add",
             actionIcon: <AddIcon />,
             onActionClick() {
-                dispatch(addLanguage({
-                    id: nanoid(),
-                    language: "",
-                    level: ""
+                dispatch(addFormItem({
+                    type: "languages",
+                    data: {
+                        id: nanoid(),
+                        language: "",
+                        level: ""
+                    }
                 }));
             }
         },
@@ -141,7 +152,11 @@ export const Form = () => {
     });
     return (
         <>
-            <Grid container spacing={2}>
+            <Grid
+                container
+                spacing={2}
+            // justifyContent="center"
+            >
                 {sectionList}
             </Grid>
         </>

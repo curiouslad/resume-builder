@@ -1,46 +1,15 @@
 import { Avatar, Button, Grid, TextField, Typography } from "@mui/material"
-import { nanoid } from "@reduxjs/toolkit";
 import { useFormik } from "formik";
 
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useAppSelector } from "../../../../app/hooks";
 
 const content = {
     title: "Personal Details",
-    fields: [
-        {
-            id: nanoid(),
-            name: "wantedJobTitle",
-            label: "Wanted Job Title",
-        },
-        {
-            id: nanoid(),
-            name: "firstName",
-            label: "First Name"
-        },
-        {
-            id: nanoid(),
-            name: "lastName",
-            label: "Last Name"
-        },
-        {
-            id: nanoid(),
-            name: "email",
-            label: "Email"
-        },
-        {
-            id: nanoid(),
-            name: "phone",
-            label: "Phone"
-        },
-        {
-            id: nanoid(),
-            name: "country",
-            label: "Country"
-        }
-    ]
 }
 export const PersonalDetails = () => {
+    const persoanlFields = useAppSelector(state => state.editorForm.personalDetails.fields);
     const formik = useFormik({
         initialValues: {},
         onSubmit(values) {
@@ -48,7 +17,7 @@ export const PersonalDetails = () => {
             // Dispatch data to redux 
         }
     });
-    const fieldsList = content.fields.map(field => {
+    const fieldsList = persoanlFields.map(field => {
         return (
             <Grid key={field.id} item xs={12} sm={6} lg={4}>
                 <TextField
@@ -75,6 +44,7 @@ export const PersonalDetails = () => {
                         container
                         alignItems="center"
                         justifyContent="center"
+                        flexDirection="column"
                         spacing={2}
                     >
                         <Grid item>
@@ -88,10 +58,8 @@ export const PersonalDetails = () => {
                         </Grid>
                         <Grid
                             item
-                            direction='column'
                         >
                             <Button startIcon={<EditIcon />}>Edit photo</Button>
-                            <br></br>
                             <Button startIcon={<DeleteIcon />} color="error">Delete photo</Button>
                         </Grid>
                     </Grid>

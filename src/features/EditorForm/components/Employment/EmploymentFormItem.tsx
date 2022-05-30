@@ -2,17 +2,12 @@ import {
     Box, Grid, TextField
 } from "@mui/material"
 import { useFormik } from "formik";
-import { EmploymentField } from "./EmploymentSlice";
 import { DatePicker } from '@mui/x-date-pickers';
-import { RichTextBox } from "../RichTextEditor/RichTextBox";
+import { EmploymentField } from "../../../../types/FormFields/EmploymentField";
+import { RichTextBox } from "../../../RichTextEditor/RichTextBox";
 
 
-// interface EmploymentFormData {
-//     value: string;
-//     label: string;
-//     placeholder: string;
 
-// };
 interface EmploymentFormItemProps {
     field: EmploymentField;
     onChange: (id: string, values: Partial<EmploymentField>) => void;

@@ -1,32 +1,21 @@
 import { configureStore, createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
-import EmploymentReducer, { addEmploymentItem } from "../features/Employment/EmploymentSlice";
-import EducationReducer, { addEducationItem } from "../features/Education/EducationSlice";
 import CollapsableReducer, { setCollapsableId } from "../features/Collapsable/CollapsableSlice";
-import SkillsReducer from "../features/Skills/SkillsSlice";
-import SummaryReducer from "../features/Summary/SummarySlice";
-import LinksReducer from "../features/Links/LinksSlice";
-import LanguagesReducer from "../features/Languages/LanguagesSlice";
-
+import EditorFormReducer, { addFormItem } from "../features/EditorForm/EditorFormSlice";
 
 
 const collapsableMiddleware = createListenerMiddleware();
 collapsableMiddleware.startListening({
-    matcher: isAnyOf(addEducationItem, addEmploymentItem),
+    matcher: isAnyOf(addFormItem),
     effect(action, listenerApi) {
         // Opens collapsable item when new one is created and closes others
-        listenerApi.dispatch(setCollapsableId(action.payload.id));
+        listenerApi.dispatch(setCollapsableId(action.payload.data.id));
     }
 });
 
 export const store = configureStore({
     reducer: {
-        employment: EmploymentReducer,
-        education: EducationReducer,
         collapsable: CollapsableReducer,
-        skills: SkillsReducer,
-        summary: SummaryReducer,
-        links: LinksReducer,
-        languages: LanguagesReducer
+        editorForm: EditorFormReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(collapsableMiddleware.middleware),

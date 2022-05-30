@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material"
 import { Form } from "../layouts/Form"
+import { PreviewLayout } from "../layouts/PreviewLayout"
 
 export const Editor = () => {
     return (
@@ -7,10 +8,10 @@ export const Editor = () => {
             <Grid
                 container
                 spacing={5}
-                justifyContent="center"
+            // justifyContent="center"
             >
                 <Grid
-                    alignSelf="center"
+                    // alignSelf="center"
                     item
                     md={6}
                     xs={12}
@@ -18,10 +19,7 @@ export const Editor = () => {
                     <Form></Form>
                 </Grid>
                 <Grid item md={6}>
-                    <div>a</div>
-                    {/* <Container> */}
-                    {/* <Form></Form> */}
-                    {/* </Container> */}
+                    <PreviewLayout />
                 </Grid>
             </Grid>
         </>

@@ -1,4 +1,4 @@
-import { Box, Collapse, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Typography } from "@mui/material"
+import { Box, Collapse, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Tooltip, Typography } from "@mui/material"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -16,6 +16,11 @@ interface CollapsableFormItemProps {
     children: JSX.Element;
     onMenuDelete: (id: string) => void;
     skill?: boolean;
+}
+
+const content = {
+    editMenu: "Edit",
+    deleteMenu: "Delete"
 }
 export const CollapsableFormItem = (
     { header, subHeader, children, id, onMenuDelete, skill }: CollapsableFormItemProps
@@ -49,9 +54,18 @@ export const CollapsableFormItem = (
         <Box
             sx={{
                 display: 'flex',
+                alignItems: "center"
             }}
         >
-            <DragIndicatorIcon />
+            {/* <div>
+                <Tooltip title="Reorder">
+                    <IconButton
+                        aria-label="Reorder by dragging"
+                    >
+                        <DragIndicatorIcon />
+                    </IconButton>
+                </Tooltip>
+            </div> */}
             <Box
                 // component="button"
                 sx={{
@@ -121,7 +135,7 @@ export const CollapsableFormItem = (
                     {children}
                 </Collapse>
             </Box>
-
+            {/* <p>a</p> */}
             <Menu
                 anchorEl={anchorEl}
                 open={isMenuOpen}
@@ -139,7 +153,7 @@ export const CollapsableFormItem = (
                     <ListItemIcon>
                         <EditIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Edit</ListItemText>
+                    <ListItemText>{content.editMenu}</ListItemText>
                 </MenuItem>
                 <MenuItem
                     onClick={handleMenuDelete}
@@ -147,7 +161,7 @@ export const CollapsableFormItem = (
                     <ListItemIcon>
                         <DeleteIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Delete</ListItemText>
+                    <ListItemText>{content.deleteMenu}</ListItemText>
                 </MenuItem>
             </Menu>
         </Box>

@@ -1,7 +1,7 @@
 import { Box, Grid, TextField } from '@mui/material';
 import { useFormik } from 'formik'
 import React from 'react'
-import { LinkField } from './LinksSlice';
+import { LinkField } from '../../../../types/FormFields/LinkField';
 
 
 interface LinkItemProps {

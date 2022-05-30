@@ -1,21 +1,20 @@
 import { Box, Grid, MenuItem, TextField } from "@mui/material";
 import { useFormik } from "formik";
-import { useAppDispatch } from "../../app/hooks";
-import { SkillsField, updateSkill } from "./SkillsSlice"
+import { SkillField } from "../../../../types/FormFields/SkillField";
 
 
 interface SkillSFormItemProps {
-    field: SkillsField;
+    field: SkillField;
+    onChange: (id: string, data: Partial<SkillField>) => void;
 }
-export const SkillSFormItem = ({ field }: SkillSFormItemProps) => {
-    const dispatch = useAppDispatch();
+export const SkillSFormItem = ({ field, onChange }: SkillSFormItemProps) => {
     const formik = useFormik({
         initialValues: {
             name: field.name,
             level: field.level
         },
         onSubmit(values) {
-            dispatch(updateSkill({ id: field.id, data: values }))
+            onChange(field.id, values);
         }
     });
 

@@ -3,8 +3,8 @@ import {
 } from "@mui/material"
 import { useFormik } from "formik";
 import { DatePicker } from '@mui/x-date-pickers';
-import { RichTextBox } from "../RichTextEditor/RichTextBox";
-import { EducationField } from "./EducationSlice";
+import { RichTextBox } from "../../../RichTextEditor/RichTextBox";
+import { EducationField } from "../../../../types/FormFields/EducationField";
 
 
 interface EducationFormItemProps {

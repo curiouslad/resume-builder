@@ -1,12 +1,12 @@
 import { Box, Grid, TextField, MenuItem } from "@mui/material"
 import { useFormik } from "formik"
-import { LanguagesField } from "./LanguagesSlice";
+import { LanguageField } from "../../../../types/FormFields/LanguageField";
 
 
 
 interface LanguagesItemProps {
-    field: LanguagesField;
-    onChange: (id: string, values: Partial<LanguagesField>) => void;
+    field: LanguageField;
+    onChange: (id: string, values: Partial<LanguageField>) => void;
 }
 export const LanguagesItem = ({ field, onChange }: LanguagesItemProps) => {
     const formik = useFormik({
