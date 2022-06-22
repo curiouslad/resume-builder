@@ -8,7 +8,7 @@ import { LanguagesItem } from "./LanguagesItem";
 export const LanguagesForm = () => {
     const languages = useAppSelector(state => state.editorForm.languages.fields);
     const dispatch = useAppDispatch();
-    const languagesList = languages.map(language => {
+    const languagesList = languages.map((language, index) => {
         return (
             <Grid
                 item
@@ -18,6 +18,7 @@ export const LanguagesForm = () => {
                 <CollapsableFormItem
                     header={language.language}
                     subHeader={language.level}
+                    index={index}
                     id={language.id}
                     onMenuDelete={(id: string) => {
                         dispatch(removeFormItem({

@@ -7,12 +7,13 @@ import { LinkItem } from "./LinkItem";
 export const LinksForm = () => {
     const links = useAppSelector(state => state.editorForm.links.fields);
     const dispatch = useAppDispatch();
-    const linksList = links.map(link => {
+    const linksList = links.map((link, index) => {
         return (
             <CollapsableFormItem
                 key={link.id}
                 id={link.id}
                 header={link.name}
+                index={index}
                 subHeader={link.link}
                 onMenuDelete={(id: string) => {
                     dispatch(removeFormItem({

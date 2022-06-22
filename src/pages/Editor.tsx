@@ -1,4 +1,6 @@
-import { Grid } from "@mui/material"
+import { Container, Grid } from "@mui/material"
+import { DndProvider, useDragLayer } from "react-dnd"
+import { TouchBackend } from "react-dnd-touch-backend"
 import { Form } from "../layouts/Form"
 import { PreviewLayout } from "../layouts/PreviewLayout"
 
@@ -7,21 +9,56 @@ export const Editor = () => {
         <>
             <Grid
                 container
-                spacing={5}
-            // justifyContent="center"
             >
                 <Grid
-                    // alignSelf="center"
+                    sx={{
+                        padding: '0 10px'
+                    }}
                     item
-                    md={6}
                     xs={12}
+                    lg={6}
+                    xl={6}
                 >
-                    <Form></Form>
+                    <Container
+                    >
+                        {/* <DndProvider backend={TouchBackend} options={{
+                            enableMouseEvents: true,
+                            preview: true
+                        }}> */}
+
+                        <Form></Form>
+
+                        {/* <DragLayerComponent />
+                        </DndProvider> */}
+                    </Container>
                 </Grid>
-                <Grid item md={6}>
+                <Grid
+                    item
+                    sx={(theme) => ({
+                        [theme.breakpoints.down('lg')]: {
+                            display: 'none'
+                        }
+                    })}
+                    lg={6}
+                    xl={6}
+                >
                     <PreviewLayout />
                 </Grid>
             </Grid>
         </>
     )
+}
+
+
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function DragLayerComponent(props: any) {
+    console.log(props);
+
+    const collectedProps = useDragLayer(
+        monitor => monitor
+    )
+    console.log(collectedProps);
+
+    return <div>...</div>
 }

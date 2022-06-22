@@ -86,7 +86,7 @@ export const Form = () => {
                         level: ""
                     }
                 }))
-            }
+            },
         },
         {
             title: "Websites & Social Links",

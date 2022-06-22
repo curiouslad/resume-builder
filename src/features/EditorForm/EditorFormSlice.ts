@@ -96,7 +96,9 @@ const initialState: EditorFormState = {
     }
 };
 
-type EditorFormItemType = "employment" | "education" | "skills" | "links" | "languages" | "summary";
+export type EditorFormItemType = "employment" | "education" | "skills" | "links" | "languages" | "summary";
+export type EditorFormFieldType = EmploymentField | EducationField | SkillField | LinkField | LanguageField;
+
 interface BaseEditorForm {
     type: EditorFormItemType;
 }
@@ -130,6 +132,22 @@ const editorFormSlice = createSlice({
             const index = state[action.payload.type].fields
                 .findIndex(field => field.id === action.payload.id);
             state[action.payload.type].fields.splice(index, 1);
+        },
+        reorderFormItems(
+            state: EditorFormState,
+            action: PayloadAction<
+                { type: EditorFormItemType, dragIndex: number, hoverIndex: number }
+            >
+        ) {
+            // Array.prototype.move = function (from, to) {
+            //     this.splice(to, 0, this.splice(from, 1)[0]);
+            //   };
+            const to = action.payload.hoverIndex;
+            const from = action.payload.dragIndex;
+
+            state[action.payload.type].fields
+                // @ts-ignore
+                .splice(to, 0, state[action.payload.type].fields.splice(from, 1)[0])
         }
     }
 });
@@ -138,5 +156,10 @@ const editorFormSlice = createSlice({
 // export {
 //     selectEmploymentFields
 // }
-export const { addFormItem, updateFormItem, removeFormItem } = editorFormSlice.actions;
+export const {
+    addFormItem,
+    updateFormItem,
+    removeFormItem,
+    reorderFormItems
+} = editorFormSlice.actions;
 export default editorFormSlice.reducer;

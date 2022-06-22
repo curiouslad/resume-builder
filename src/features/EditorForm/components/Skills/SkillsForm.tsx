@@ -8,7 +8,7 @@ import { SkillSFormItem } from "./SkillSFormItem";
 export const SkillsForm = () => {
     const skills = useAppSelector(state => state.editorForm.skills.fields);
     const dispatch = useAppDispatch();
-    const skillsList = skills.map(field => {
+    const skillsList = skills.map((field, index) => {
         return (
             <Grid
                 item
@@ -19,13 +19,13 @@ export const SkillsForm = () => {
                     header={field.name}
                     subHeader={field.level.toString()}
                     id={field.id}
+                    index={index}
                     onMenuDelete={(id: string) => {
                         dispatch(removeFormItem({
                             id,
                             type: "skills"
                         }))
                     }}
-                    skill={true}
                 >
                     <SkillSFormItem
                         field={field}
